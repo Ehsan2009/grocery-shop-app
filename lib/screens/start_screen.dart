@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class StartScreen extends StatefulWidget {
-  const StartScreen(this.switchScreen, {super.key});
-
-  final void Function() switchScreen;
+  const StartScreen({super.key});
 
   @override
   State<StartScreen> createState() => _StartScreenState();
@@ -19,7 +18,7 @@ class _StartScreenState extends State<StartScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 150),
               child: Image.asset(
-                'lib/images/avocado.png',
+                'assets/images/avocado.png',
                 width: 250,
               ),
             ),
@@ -41,7 +40,9 @@ class _StartScreenState extends State<StartScreen> {
             ),
             const SizedBox(height: 50),
             GestureDetector(
-              onTap: widget.switchScreen,
+              onTap: () {
+                context.go('/home_screen');
+              },
               child: Container(
                 width: 140,
                 height: 60,

@@ -1,30 +1,15 @@
 import 'package:flutter/material.dart';
-
+import 'package:grocery_shop_app/const.dart';
 import 'package:grocery_shop_app/models/fruit.dart';
 
-class FruitItem extends StatefulWidget {
+class FruitItem extends StatelessWidget {
   const FruitItem({
     super.key,
-    required this.onAddFruit,
-    required this.fruitImage,
-    required this.fruitName,
-    required this.fruitPrice,
-    required this.backgroundColor,
-    required this.buttonColor,
+    required this.fruit,
   });
 
-  final void Function(Fruit fruit) onAddFruit;
-  final String fruitImage;
-  final String fruitName;
-  final double fruitPrice;
-  final Color backgroundColor;
-  final Color buttonColor;
+  final Fruit fruit;
 
-  @override
-  State<FruitItem> createState() => _FruitItemState();
-}
-
-class _FruitItemState extends State<FruitItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,36 +17,30 @@ class _FruitItemState extends State<FruitItem> {
       height: 250,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: widget.backgroundColor,
+        color: fruit.backgroundColor,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Center(
         child: Column(
           children: [
             Image.asset(
-              widget.fruitImage,
+              fruit.fruitImage,
               width: 100,
             ),
             const SizedBox(height: 10),
-            Text(widget.fruitName),
+            Text(fruit.fruitName),
             const SizedBox(height: 10),
             GestureDetector(
               onTap: () {
-                widget.onAddFruit(
-                  Fruit(
-                    widget.fruitImage,
-                    widget.fruitName,
-                    widget.fruitPrice,
-                  ),
-                );
+                fruitManager.addFruit(fruit);
               },
               child: Container(
                 width: 100,
                 height: 40,
                 alignment: Alignment.center,
-                color: widget.buttonColor,
+                color: fruit.buttonColor,
                 child: Text(
-                  '\$${widget.fruitPrice}0',
+                  '\$${fruit.fruitPrice}0',
                   style: const TextStyle(color: Colors.white),
                 ),
               ),

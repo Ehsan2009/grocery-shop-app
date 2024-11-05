@@ -1,23 +1,17 @@
+import 'package:flutter/material.dart';
+
 class Fruit {
-  const Fruit(this.fruitImage, this.fruitName, this.fruitPrice);
+  const Fruit({
+    required this.fruitImage,
+    required this.fruitName,
+    required this.fruitPrice,
+    required this.backgroundColor,
+    required this.buttonColor,
+  });
 
   final String fruitImage;
   final String fruitName;
   final double fruitPrice;
-}
-
-class AllExpenses {
-  const AllExpenses(this.fruits);
-
-  final List<Fruit> fruits;
-  
-  double get totalPrice {
-    double sum = 0;
-
-    for (final fruit in fruits) {
-      sum += fruit.fruitPrice;
-    }
-
-    return sum;
-  }
+  final Color backgroundColor;
+  final Color buttonColor;
 }

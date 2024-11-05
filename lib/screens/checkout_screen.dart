@@ -1,43 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:grocery_shop_app/const.dart';
+import 'package:grocery_shop_app/models/all_expenses.dart';
+import 'package:grocery_shop_app/components/registered_fruit.dart';
 
-import 'package:grocery_shop_app/models/fruit.dart';
-import 'package:grocery_shop_app/widgets/registered_fruit.dart';
-
-class ExpenseManagementScreen extends StatefulWidget {
-  const ExpenseManagementScreen({
-    super.key,
-    required this.fruits,
-  });
-
-  final List<Fruit> fruits;
+class CheckoutScreen extends StatefulWidget {
+  const CheckoutScreen({super.key});
 
   @override
-  State<ExpenseManagementScreen> createState() =>
-      _ExpenseManagementScreenState();
+  State<CheckoutScreen> createState() => _CheckoutScreenState();
 }
 
-class _ExpenseManagementScreenState extends State<ExpenseManagementScreen> {
-  void removeFruit(Fruit fruit) {
-    setState(() {
-      widget.fruits.remove(fruit);
-    });
-  }
-
+class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     Widget mainContent = const Text('Cart is empty..');
 
-    if (widget.fruits.isNotEmpty) {
+    if (fruitManager.fruits.isNotEmpty) {
       mainContent = ListView.builder(
-        itemCount: widget.fruits.length,
+        itemCount: fruitManager.fruits.length,
         itemBuilder: (ctx, index) => RegisteredFruit(
-          fruits: widget.fruits,
-          onRemoveFruit: removeFruit,
-          index: index,
-          fruitImage: widget.fruits[index].fruitImage,
-          fruitName: widget.fruits[index].fruitName,
-          fruitPrice: widget.fruits[index].fruitPrice,
+          fruit: fruitManager.fruits[index],
+          onRemove: () {
+            setState(() {
+              fruitManager.removeFruit(fruitManager.fruits[index]);
+            });
+          },
         ),
       );
     }
@@ -81,7 +68,7 @@ class _ExpenseManagementScreenState extends State<ExpenseManagementScreen> {
                           style: TextStyle(color: Colors.white),
                         ),
                         Text(
-                          '\$${AllExpenses(widget.fruits).totalPrice}0',
+                          '\$${AllExpenses(fruitManager.fruits).totalPrice}0',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20,
