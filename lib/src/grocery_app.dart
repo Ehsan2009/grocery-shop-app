@@ -27,7 +27,7 @@ class GroceryApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      routerConfig: router,
+      routerConfig: goRouter,
     );
   }
 }

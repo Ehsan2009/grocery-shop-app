@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:grocery_shop_app/src/features/grocery/presentation/home_page/home_grocery_tile.dart';
 import 'package:grocery_shop_app/src/constants/dummy_groceries.dart';
-import 'package:grocery_shop_app/src/features/cart/presentation/cart_screen.dart';
+import 'package:grocery_shop_app/src/routing/app_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -63,12 +64,7 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const CartScreen(),
-            ),
-          );
+          context.pushNamed(AppRoute.cart.name);
         },
         shape: const CircleBorder(),
         backgroundColor: Colors.black,
